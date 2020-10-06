@@ -13,10 +13,10 @@
 Start using *Student Organizer* today and **never miss a deadline again!**
 
 ## User Stories
-- As a user, I want to be able to add an assignment to my to-do list
-- As a user, I want to be able to view the list of assignments sorted by course code on my to-do list
-- As a user, I want to be able to mark an assignment as complete on my to-do list
-- As a user, I want to be able to view the list of incomplete assignments sorted by course code on my to-do list
-- As a user, I want to be able to view the list of incomplete assignments sorted by the due date on my to-do list
-- As a user, I want to be able to view the list of incomplete assignments sorted by estimated time for completion on my to-do list
-- As a user, I want to be able to delete an assignment from my to-do list
+- As a user, I want to be able to add an assignment to my student organizer
+- As a user, I want to be able to view the list of assignments sorted by course code in my student organizer
+- As a user, I want to be able to mark an assignment as complete in my student organizer
+- As a user, I want to be able to view the list of incomplete assignments sorted by course code in my student organizer
+- As a user, I want to be able to view the list of incomplete assignments sorted by the due date in my student organizer
+- As a user, I want to be able to view the list of incomplete assignments sorted by estimated time for completion in my student organizer
+- As a user, I want to be able to delete an assignment from my student organizer
