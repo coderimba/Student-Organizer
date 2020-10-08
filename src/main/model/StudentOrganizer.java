@@ -33,7 +33,7 @@ public class StudentOrganizer {
     }
 
     // REQUIRES: the StudentOrganizer contains an assignment with both the same name and courseCode as the arguments
-    // MODIFIES: this
+    // MODIFIES: the Assignment in StudentOrganizer with both the same name and courseCode as the arguments
     // EFFECTS: marks the assignment in the StudentOrganizer with both the same name and course code as the arguments
     // as complete
     public void markAssignmentComplete(String name, String courseCode) {
