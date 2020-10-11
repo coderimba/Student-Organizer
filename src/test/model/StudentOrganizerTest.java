@@ -38,8 +38,12 @@ class StudentOrganizerTest {
         testStudentOrganizer.addAssignment(a1);
         Assignment a2 = new Assignment(" Lab 5 ", " Cpsc 210 ", LocalDate.of(2020, 10, 20).toString(), 2);
         testStudentOrganizer.addAssignment(a2);
+        Assignment a3 = new Assignment("lab 4 ", " cpsc 121",LocalDate.of(2020,10,1).toString(),2);
+        testStudentOrganizer.addAssignment(a3);
 
         testStudentOrganizer.deleteAssignment("  LAB 5  ", "cPSC 210");
+        assertEquals(2, testStudentOrganizer.size());
+        testStudentOrganizer.deleteAssignment("Lab 4", " Cpsc 121 ");
         assertEquals(1, testStudentOrganizer.size());
         testStudentOrganizer.deleteAssignment("lab 4", " cpsc 210 ");
         assertEquals(0, testStudentOrganizer.size());
@@ -51,9 +55,13 @@ class StudentOrganizerTest {
         testStudentOrganizer.addAssignment(a1);
         Assignment a2 = new Assignment(" Lab 5 ", " Cpsc 210 ", LocalDate.of(2020, 10, 20).toString(), 2);
         testStudentOrganizer.addAssignment(a2);
+        Assignment a3 = new Assignment("lab 4 ", " cpsc 121",LocalDate.of(2020,10,1).toString(),2);
+        testStudentOrganizer.addAssignment(a3);
 
         testStudentOrganizer.markAssignmentComplete("  LAB 5  ", "cPSC 210");
         assertTrue(a2.isComplete());
+        testStudentOrganizer.markAssignmentComplete("Lab 4", " Cpsc 121 ");
+        assertTrue(a3.isComplete());
         testStudentOrganizer.markAssignmentComplete("lab 4", " cpsc 210 ");
         assertTrue(a1.isComplete());
     }
