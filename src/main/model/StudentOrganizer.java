@@ -23,7 +23,8 @@ public class StudentOrganizer {
     // EFFECTS: deletes the assignment in the StudentOrganizer with both the same name and course code as the arguments
     public void deleteAssignment(String name, String courseCode) {
         boolean removedAssignment = false;
-        for (int i = 0; i < studentOrganizer.size() && !removedAssignment; i++) {
+        int sizeBeforeRemoving = studentOrganizer.size();
+        for (int i = 0; i < sizeBeforeRemoving && !removedAssignment; i++) {
             if (studentOrganizer.get(i).getName().equalsIgnoreCase(name.trim())
                     && studentOrganizer.get(i).getCourseCode().equalsIgnoreCase(courseCode.trim())) {
                 studentOrganizer.remove(i);
