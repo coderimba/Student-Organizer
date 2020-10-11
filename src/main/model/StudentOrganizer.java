@@ -95,7 +95,7 @@ public class StudentOrganizer {
 
     // REQUIRES: the StudentOrganizer contains at least one incomplete assignment
     // EFFECTS: returns the incomplete assignments
-    public ArrayList<Assignment> incomplete() {
+    private ArrayList<Assignment> incomplete() {
         ArrayList<Assignment> incompleteAssignments = new ArrayList<>();
         for (Assignment a: studentOrganizer) {
             if (!a.isComplete()) {
@@ -108,7 +108,7 @@ public class StudentOrganizer {
     // REQUIRES: list.size() >= 1
     // MODIFIES: ArrayList<Assignment> list (the argument)
     // EFFECTS: sorts list based on course code
-    public ArrayList<Assignment> insertionSortByCourseCode(ArrayList<Assignment> list) {
+    private ArrayList<Assignment> insertionSortByCourseCode(ArrayList<Assignment> list) {
         for (int i = 1; i < list.size(); i++) {
             Assignment temp = list.get(i);
             int pos = i;
@@ -122,5 +122,10 @@ public class StudentOrganizer {
             list.set(pos, temp);
         }
         return list;
+    }
+
+    // EFFECTS: returns the number of assignments in the StudentOrganizer
+    public int size() {
+        return studentOrganizer.size();
     }
 }
