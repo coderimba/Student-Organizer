@@ -201,20 +201,17 @@ class StudentOrganizerTest {
         testStudentOrganizer.addAssignment(a5);
         Assignment a6 = new Assignment("Pre-lab 5", " CPSC 121 ", LocalDate.of(2020,10,15).toString(), 1);
         testStudentOrganizer.addAssignment(a6);
-        Assignment a7 = new Assignment("C1 Lecture Ticket", "cpsc 210", LocalDate.of(2020,10,13).toString(),0.25);
-        testStudentOrganizer.addAssignment(a7);
 
         testStudentOrganizer.markAssignmentComplete("a5 ", "Math 200");
 
         ArrayList<Assignment> incompleteByDueDate = testStudentOrganizer.viewIncompleteAssignmentsByDueDate();
-        assertEquals(7,incompleteByDueDate.size());
+        assertEquals(6,incompleteByDueDate.size());
         assertEquals("2020-10-06", incompleteByDueDate.get(0).getDueDate());
-        assertEquals("2020-10-13", incompleteByDueDate.get(1).getDueDate());
+        assertEquals("2020-10-14", incompleteByDueDate.get(1).getDueDate());
         assertEquals("2020-10-14", incompleteByDueDate.get(2).getDueDate());
-        assertEquals("2020-10-14", incompleteByDueDate.get(3).getDueDate());
-        assertEquals("2020-10-15", incompleteByDueDate.get(4).getDueDate());
-        assertEquals("2020-11-01", incompleteByDueDate.get(5).getDueDate());
-        assertEquals("2021-01-04", incompleteByDueDate.get(6).getDueDate());
+        assertEquals("2020-10-15", incompleteByDueDate.get(3).getDueDate());
+        assertEquals("2020-11-01", incompleteByDueDate.get(4).getDueDate());
+        assertEquals("2021-01-04", incompleteByDueDate.get(5).getDueDate());
     }
 
     @Test
@@ -233,8 +230,6 @@ class StudentOrganizerTest {
 
     @Test
     public void testViewIncompleteAssignmentsByEstimatedHoursManyAssignments() {
-        Assignment a0 = new Assignment("hypothetical", "cpsc 210",LocalDate.of(2021,1,4).toString(),5);
-        testStudentOrganizer.addAssignment(a0);
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", LocalDate.of(2020, 10, 6).toString(), 2);
         testStudentOrganizer.addAssignment(a1);
         Assignment a2 = new Assignment("a2", "  cpsc 121",LocalDate.of(2020,10,14).toString(),4);
@@ -253,14 +248,13 @@ class StudentOrganizerTest {
         testStudentOrganizer.markAssignmentComplete("a5 ", "Math 200");
 
         ArrayList<Assignment> incompleteByEstimatedHours = testStudentOrganizer.viewIncompleteAssignmentsByEstimatedHours();
-        assertEquals(7,incompleteByEstimatedHours.size());
+        assertEquals(6,incompleteByEstimatedHours.size());
         assertEquals(0.25, incompleteByEstimatedHours.get(0).getEstimatedHours());
         assertEquals(0.5, incompleteByEstimatedHours.get(1).getEstimatedHours());
         assertEquals(1, incompleteByEstimatedHours.get(2).getEstimatedHours());
         assertEquals(2, incompleteByEstimatedHours.get(3).getEstimatedHours());
         assertEquals(4, incompleteByEstimatedHours.get(4).getEstimatedHours());
-        assertEquals(5, incompleteByEstimatedHours.get(5).getEstimatedHours());
-        assertEquals(10, incompleteByEstimatedHours.get(6).getEstimatedHours());
+        assertEquals(10, incompleteByEstimatedHours.get(5).getEstimatedHours());
     }
 
     @Test

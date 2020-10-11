@@ -29,5 +29,4 @@ class AssignmentTest {
         testAssignment.markComplete();
         assertTrue(testAssignment.isComplete());
     }
-
 }
