@@ -11,13 +11,13 @@ public class Assignment {
 
     // REQUIRES: name contains at least one letter or digit. courseCode has a length of 8, following the format of
     // 4 letters, 1 whitespace, and 3 digits, excluding any whitespace before or after the first and last characters,
-    // respectively (e.g. " Cpsc 210 " is acceptable). dueDate is in the format yyyy-mm-dd
+    // respectively (e.g. " Cpsc 210 " is acceptable). dueDate is in the format mm-dd
     // EFFECTS: constructs an Assignment with a name, a corresponding course, a due date,
     // an estimated number of hours needed for completion, and it is marked as incomplete by default
     public Assignment(String name, String courseCode, String dueDate, double estimatedHours) {
         setName(name.trim());
         setCourseCode(courseCode.toUpperCase().trim());
-        setDueDate(dueDate);
+        setDueDate(dueDate.trim());
         setEstimatedHours(estimatedHours);
         setComplete(false);
     }

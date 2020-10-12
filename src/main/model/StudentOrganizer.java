@@ -11,7 +11,6 @@ public class StudentOrganizer {
         studentOrganizer = new ArrayList<>();
     }
 
-    // REQUIRES: there isn't already an assignment in the StudentOrganizer with both the same name and courseCode
     // MODIFIES: this
     // EFFECTS: adds an assignment to the StudentOrganizer
     public void addAssignment(Assignment assignment) {
