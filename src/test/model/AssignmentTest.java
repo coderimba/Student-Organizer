@@ -31,7 +31,8 @@ class AssignmentTest {
     @Test
     public void testToString() {
         assertEquals("[ CPSC 210 Lab 4 (due: 10-06, estimated time: 2.0 hours, Incomplete) ]", testAssignment.toString());
+        testAssignment = new Assignment("Project 1", "cPSc 101", "09-08", 12.5);
         testAssignment.markComplete();
-        assertEquals("[ CPSC 210 Lab 4 (due: 10-06, estimated time: 2.0 hours, Completed) ]", testAssignment.toString());
+        assertEquals("[ CPSC 101 Project 1 (due: 09-08, estimated time: 12.5 hours, Completed) ]", testAssignment.toString());
     }
 }

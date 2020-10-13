@@ -29,7 +29,7 @@ public class StudentOrganizerApp {
 
         while (!exit) {
             displayMainMenu();
-            command = input.next().toLowerCase();
+            command = input.nextLine().toLowerCase().trim();
 
             if (command.equals("e")) {
                 exit = true;
@@ -83,7 +83,8 @@ public class StudentOrganizerApp {
     // REQUIRES: name contains at least one letter or digit. courseCode has a length of 8, following the format of
     // 4 letters, 1 whitespace, and 3 digits, excluding any whitespace before or after the first and last characters,
     // respectively (e.g. " Cpsc 210 " is acceptable). dueDate is in the format mm-dd and must be valid e.g. mm cannot
-    // be 13, and dd cannot be 30 if mm is 02 (there is no such thing as 30 February)
+    // be 13, and dd cannot be 30 if mm is 02 (there is no such thing as 30 February). estimatedHours > 0 and has to
+    // be digit(s)
     // MODIFIES: this
     // EFFECTS: prompts user to add an assignment to the StudentOrganizer
     private void addMyAssignment() {
@@ -92,9 +93,9 @@ public class StudentOrganizerApp {
 
         enterNameAndCourseCode();
         System.out.print("Enter the due date of the assignment in the format mm-dd (e.g. 09-08 for September 8): ");
-        dueDate = input.next();
+        dueDate = input.nextLine();
         System.out.print("Enter the estimated number of hours needed to complete assignment (e.g. 0.5 for 30 min): ");
-        estimatedHours = input.nextDouble();
+        estimatedHours = Double.parseDouble(input.nextLine());
 
         myStudentOrganizer.addAssignment(new Assignment(name, courseCode, dueDate, estimatedHours));
     }
@@ -125,7 +126,7 @@ public class StudentOrganizerApp {
 
         while (!end) {
             displaySortAssignmentsMenu();
-            command = input.next();
+            command = input.nextLine().trim();
 
             if (command.equals("5")) {
                 end = true;
@@ -138,13 +139,10 @@ public class StudentOrganizerApp {
     // MODIFIES: this
     // EFFECTS: prompts user to enter the name and course code of assignment
     private void enterNameAndCourseCode() {
-        input.nextLine(); //to discard the remaining parts of the input
         System.out.print("Enter the name of the assignment: ");
         name = input.nextLine();
-        input.nextLine(); //to discard the remaining parts of the input
         System.out.print("Enter the course code of the assignment (e.g. CPSC 210): ");
         courseCode = input.nextLine();
-        input.nextLine(); //to discard the remaining parts of the input
     }
 
     // EFFECTS: displays different ways assignments can be sorted from the menu to the user
