@@ -1,7 +1,7 @@
 package model;
 
-// Represents an assignment with a course code, a due date, an estimated time for completion (in hours),
-// and it is marked as incomplete by default.
+// Represents an assignment with a name, a course code, a due date, an estimated time for completion (in hours),
+// and whether or not it has been completed.
 public class Assignment {
     private String name;
     private String courseCode;
