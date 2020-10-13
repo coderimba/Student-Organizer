@@ -91,7 +91,7 @@ public class StudentOrganizerApp {
         double estimatedHours;
 
         enterNameAndCourseCode();
-        System.out.print("Enter the due date of the assignment in the format mm-dd (e.g. 10-14 for October 14): ");
+        System.out.print("Enter the due date of the assignment in the format mm-dd (e.g. 09-08 for September 8): ");
         dueDate = input.next();
         System.out.print("Enter the estimated number of hours needed to complete assignment (e.g. 0.5 for 30 min): ");
         estimatedHours = input.nextDouble();
