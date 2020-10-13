@@ -113,7 +113,7 @@ public class StudentOrganizer {
             Assignment temp = list.get(i);
             int pos = i;
             while (pos > 0
-                    && !temp.getCourseCode().substring(0,8).equals(list.get(pos - 1).getCourseCode().substring(0,8))) {
+                    && !temp.getCourseCode().equals(list.get(pos - 1).getCourseCode())) {
                     // check that course code of temp assignment does not equal to
                     // course code of assignment in list at index = pos - 1
                 list.set(pos, list.get(pos - 1));

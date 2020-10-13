@@ -3,6 +3,7 @@ package ui;
 import model.Assignment;
 import model.StudentOrganizer;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 // Student Organizer Application
@@ -11,29 +12,29 @@ public class StudentOrganizerApp {
     private Scanner input;
     private String name;
     private String courseCode;
+    private ArrayList<Assignment> sortedAssignments;
 
     // EFFECTS: runs the Student Organizer Application
     public StudentOrganizerApp() {
         runApp();
     }
 
-    // REQUIRES: user is to key in an integer when prompted
     // MODIFIES: this
-    // EFFECTS: processes user's input(s)
+    // EFFECTS: processes user's input(s) from the main menu
     private void runApp() {
         boolean exit = false;
-        int command;
+        String command;
 
         init();
 
         while (!exit) {
-            displayMenu();
-            command = input.nextInt();
+            displayMainMenu();
+            command = input.next().toLowerCase();
 
-            if (command == 5) {
+            if (command.equals("e")) {
                 exit = true;
             } else {
-                processCommand(command);
+                processCommandMainMenu(command);
             }
         }
 
@@ -47,31 +48,31 @@ public class StudentOrganizerApp {
         input = new Scanner(System.in);
     }
 
-    // EFFECTS: displays items from the menu to the user
-    private void displayMenu() {
-        System.out.println("Choose an item from the menu:");
-        System.out.println("\t(1) Add Assignment");
-        System.out.println("\t(2) Delete Assignment");
-        System.out.println("\t(3) Mark Assignment Complete");
-        System.out.println("\t(4) Sort Assignments");
-        System.out.println("\t(5) Exit");
+    // EFFECTS: displays items from the main menu to the user
+    private void displayMainMenu() {
+        System.out.println("\nChoose an item from the menu:");
+        System.out.println("\t(a) Add Assignment");
+        System.out.println("\t(d) Delete Assignment");
+        System.out.println("\t(m) Mark Assignment Complete");
+        System.out.println("\t(v) View Assignments");
+        System.out.println("\t(e) Exit");
     }
 
     // MODIFIES: this
-    // EFFECTS: processes user's command
-    private void processCommand(int command) {
+    // EFFECTS: processes user's command from the main menu
+    private void processCommandMainMenu(String command) {
         switch (command) {
-            case 1:
+            case "a":
                 addMyAssignment();
                 break;
-            case 2:
+            case "d":
                 deleteMyAssignment();
                 break;
-            case 3:
+            case "m":
                 markMyAssignmentComplete();
                 break;
-            case 4:
-                sortMyAssignments();
+            case "v":
+                viewMyAssignments();
                 break;
             default:
                 System.out.println("Invalid selection. Try again.");
@@ -90,9 +91,9 @@ public class StudentOrganizerApp {
         double estimatedHours;
 
         enterNameAndCourseCode();
-        System.out.println("Enter the due date of the assignment in the format mm-dd (e.g. 10-14 for October 14):");
+        System.out.print("Enter the due date of the assignment in the format mm-dd (e.g. 10-14 for October 14): ");
         dueDate = input.next();
-        System.out.println("Enter the estimated number of hours needed to complete assignment (e.g. 0.5 for 30 min):");
+        System.out.print("Enter the estimated number of hours needed to complete assignment (e.g. 0.5 for 30 min): ");
         estimatedHours = input.nextDouble();
 
         myStudentOrganizer.addAssignment(new Assignment(name, courseCode, dueDate, estimatedHours));
@@ -116,19 +117,76 @@ public class StudentOrganizerApp {
         myStudentOrganizer.markAssignmentComplete(name, courseCode);
     }
 
-    // EFFECTS: prints the list of assignments based on the type of sort selected
-    private void sortMyAssignments() {
+    // MODIFIES: this
+    // EFFECTS: processes user's input(s) from the Sort Assignments menu
+    private void viewMyAssignments() {
+        boolean end = false;
+        String command;
 
+        while (!end) {
+            displaySortAssignmentsMenu();
+            command = input.next();
+
+            if (command.equals("5")) {
+                end = true;
+            } else {
+                processCommandSortAssignmentsMenu(command);
+            }
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: prompts user to enter the name and course code of assignment
     private void enterNameAndCourseCode() {
-        System.out.println("Enter the name of the assignment:");
-        name = input.next();
-        input.nextLine();
-        System.out.println("Enter the course code of the assignment (e.g. CPSC 210):");
-        courseCode = input.next();
-        input.nextLine();
+        input.nextLine(); //to discard the remaining parts of the input
+        System.out.print("Enter the name of the assignment: ");
+        name = input.nextLine();
+        input.nextLine(); //to discard the remaining parts of the input
+        System.out.print("Enter the course code of the assignment (e.g. CPSC 210): ");
+        courseCode = input.nextLine();
+        input.nextLine(); //to discard the remaining parts of the input
+    }
+
+    // EFFECTS: displays different ways assignments can be sorted from the menu to the user
+    private void displaySortAssignmentsMenu() {
+        System.out.println("\nHow would you like your assignments to be sorted?");
+        System.out.println("\t(1) By course code, all assignments");
+        System.out.println("\t(2) By course code, incomplete assignments");
+        System.out.println("\t(3) By due date, incomplete assignments");
+        System.out.println("\t(4) By estimated time for completion, incomplete assignments");
+        System.out.println("\t(5) Back to main menu");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user's command from the Sort Assignments menu
+    private void processCommandSortAssignmentsMenu(String command) {
+        switch (command) {
+            case "1": sortedAssignments = myStudentOrganizer.viewAllAssignmentsByCourseCode();
+                System.out.println("List of all assignments sorted by course code:");
+                printAssignments();
+                break;
+            case "2": sortedAssignments = myStudentOrganizer.viewIncompleteAssignmentsByCourseCode();
+                System.out.println("List of incomplete assignments sorted by course code:");
+                printAssignments();
+                break;
+            case "3": sortedAssignments = myStudentOrganizer.viewIncompleteAssignmentsByDueDate();
+                System.out.println("List of incomplete assignments sorted by due date:");
+                printAssignments();
+                break;
+            case "4": sortedAssignments = myStudentOrganizer.viewIncompleteAssignmentsByEstimatedHours();
+                System.out.println("List of incomplete assignments sorted by estimated time for completion:");
+                printAssignments();
+                break;
+            default:
+                System.out.println("Invalid selection. Try again.");
+                break;
+        }
+    }
+
+    // EFFECTS: prints the list of assignments based on the type of sort selected
+    private void printAssignments() {
+        for (Assignment a: sortedAssignments) {
+            System.out.println(a);
+        }
     }
 }

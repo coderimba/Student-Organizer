@@ -68,4 +68,10 @@ public class Assignment {
     public void setComplete(boolean complete) {
         this.complete = complete;
     }
+
+    // EFFECTS: returns a string representation of assignment
+    public String toString() {
+        return "[ " + getCourseCode() + " " + getName() + " (due: " + getDueDate() + ", estimated time: "
+                + getEstimatedHours() + " hours, " + (isComplete() ? "Completed" : "Incomplete") + ") ]";
+    }
 }
