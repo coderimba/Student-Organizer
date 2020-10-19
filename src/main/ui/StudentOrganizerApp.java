@@ -15,13 +15,13 @@ public class StudentOrganizerApp {
     private ArrayList<Assignment> sortedAssignments;
 
     // EFFECTS: runs the Student Organizer Application
-    public StudentOrganizerApp() {
+    public StudentOrganizerApp() { // based on code written in ui.TellerApp's TellerApp() constructor
         runApp();
     }
 
     // MODIFIES: this
     // EFFECTS: processes user's input(s) from the main menu
-    private void runApp() {
+    private void runApp() { // based on code written in ui.TellerApp's runTeller() method
         boolean exit = false;
         String command;
 
@@ -43,13 +43,13 @@ public class StudentOrganizerApp {
 
     // MODIFIES: this
     // EFFECTS: initializes StudentOrganizer and Scanner objects
-    private void init() {
+    private void init() { // based on code written in ui.TellerApp's init() method
         myStudentOrganizer = new StudentOrganizer();
         input = new Scanner(System.in);
     }
 
     // EFFECTS: displays items from the main menu to the user
-    private void displayMainMenu() {
+    private void displayMainMenu() { // based on code written in ui.TellerApp's displayMenu() method
         System.out.println("\nChoose an item from the menu:");
         System.out.println("\t(a) Add Assignment");
         System.out.println("\t(d) Delete Assignment");
@@ -120,7 +120,7 @@ public class StudentOrganizerApp {
 
     // MODIFIES: this
     // EFFECTS: processes user's input(s) from the Sort Assignments menu
-    private void viewMyAssignments() {
+    private void viewMyAssignments() { // based on code written in ui.TellerApp's runTeller() method
         boolean end = false;
         String command;
 
@@ -146,7 +146,7 @@ public class StudentOrganizerApp {
     }
 
     // EFFECTS: displays different ways assignments can be sorted from the menu to the user
-    private void displaySortAssignmentsMenu() {
+    private void displaySortAssignmentsMenu() { // based on code written in ui.TellerApp's displayMenu() method
         System.out.println("\nHow would you like your assignments to be sorted?");
         System.out.println("\t(1) By course code, all assignments");
         System.out.println("\t(2) By course code, incomplete assignments");
