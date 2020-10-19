@@ -1,8 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents an assignment with a name, a course code, a due date, an estimated time for completion (in hours),
 // and whether or not it has been completed.
-public class Assignment {
+public class Assignment implements Writable {
     private String name;
     private String courseCode;
     private String dueDate;
@@ -21,6 +24,17 @@ public class Assignment {
         setDueDate(dueDate.trim());
         setEstimatedHours(estimatedHours);
         setComplete(false);
+    }
+
+    // REQUIRES: only to be used by persistence.JsonReader's addAssignment method
+    // EFFECTS: constructs an Assignment with a name, a corresponding course, a due date,
+    // an estimated number of hours needed for completion, and its completion status
+    public Assignment(String name, String courseCode, String dueDate, double estimatedHours, boolean complete) {
+        setName(name);
+        setCourseCode(courseCode);
+        setDueDate(dueDate);
+        setEstimatedHours(estimatedHours);
+        setComplete(complete);
     }
 
     // REQUIRES: complete = false
@@ -74,5 +88,16 @@ public class Assignment {
     public String toString() {
         return "[ " + getCourseCode() + " " + getName() + " (due: " + getDueDate() + ", estimated time: "
                 + getEstimatedHours() + " hours, " + (isComplete() ? "Completed" : "Incomplete") + ") ]";
+    }
+
+    @Override
+    public JSONObject toJson() { // based on code written in JsonSerializationDemo's model.Thingy class' toJson() method
+        JSONObject json = new JSONObject();
+        json.put("name", getName());
+        json.put("courseCode", getCourseCode());
+        json.put("dueDate", getDueDate());
+        json.put("estimatedHours", getEstimatedHours());
+        json.put("complete", isComplete());
+        return json;
     }
 }

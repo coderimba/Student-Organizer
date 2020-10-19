@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 // A representation of a list of assignments assigned to a university student.
-public class StudentOrganizer {
+public class StudentOrganizer implements Writable {
     private ArrayList<Assignment> studentOrganizer;
 
     // EFFECTS: constructs an empty StudentOrganizer
@@ -127,5 +131,24 @@ public class StudentOrganizer {
     // EFFECTS: returns the number of assignments in the StudentOrganizer
     public int size() {
         return studentOrganizer.size();
+    }
+
+    @Override
+    public JSONObject toJson() { // based on code written in JsonSerializationDemo's model.WorkRoom class' toJson() method
+        JSONObject json = new JSONObject();
+        json.put("assignments", assignmentsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns assignments in this student organizer as a JSON array
+    private JSONArray assignmentsToJson() { // based on code written in JsonSerializationDemo's model.WorkRoom class'
+                                            // thingiesToJson() method
+        JSONArray jsonArray = new JSONArray();
+
+        for (Assignment a: studentOrganizer) {
+            jsonArray.put(a.toJson());
+        }
+
+        return jsonArray;
     }
 }
