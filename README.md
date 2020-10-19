@@ -20,3 +20,5 @@ Start using *Student Organizer* today and **never miss a deadline again!**
 - As a user, I want to be able to view the list of incomplete assignments sorted by course code in my student organizer
 - As a user, I want to be able to view the list of incomplete assignments sorted by the due date in my student organizer
 - As a user, I want to be able to view the list of incomplete assignments sorted by estimated time for completion in my student organizer
+- As a user, I want to be able to save my student organizer to file
+- As a user, I want to be able to load my student organizer from file
