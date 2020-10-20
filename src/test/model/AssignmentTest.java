@@ -14,12 +14,17 @@ class AssignmentTest {
     }
 
     @Test
-    public void testConstructor() {
+    public void testFourArgumentConstructor() {
         assertEquals("Lab 4", testAssignment.getName());
         assertEquals("CPSC 210" ,testAssignment.getCourseCode());
         assertEquals("10-06", testAssignment.getDueDate());
         assertEquals(2, testAssignment.getEstimatedHours());
         assertFalse(testAssignment.isComplete());
+    }
+
+    @Test
+    public void testFiveArgumentConstructor() {
+        // write test
     }
 
     @Test
@@ -34,5 +39,10 @@ class AssignmentTest {
         testAssignment = new Assignment("Project 1", "cPSc 101", "09-08", 12.5);
         testAssignment.markComplete();
         assertEquals("[ CPSC 101 Project 1 (due: 09-08, estimated time: 12.5 hours, Completed) ]", testAssignment.toString());
+    }
+
+    @Test
+    public void testToJson() {
+        // write test
     }
 }

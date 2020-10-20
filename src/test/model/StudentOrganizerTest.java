@@ -277,4 +277,14 @@ class StudentOrganizerTest {
 
         assertEquals(3,testStudentOrganizer.size());
     }
+
+    @Test
+    public void testToJson() {
+        // write test
+    }
+
+    @Test
+    public void testAssignmentsToJson() {
+        // write test
+    }
 }
