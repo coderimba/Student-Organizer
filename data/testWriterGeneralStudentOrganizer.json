@@ -1,0 +1,16 @@
+{"assignments": [
+    {
+        "courseCode": "CPSC 210",
+        "dueDate": "10-30",
+        "name": "P2",
+        "estimatedHours": 12,
+        "complete": false
+    },
+    {
+        "courseCode": "MATH 200",
+        "dueDate": "10-25",
+        "name": "A6",
+        "estimatedHours": 3,
+        "complete": false
+    }
+]}
