@@ -134,7 +134,8 @@ public class StudentOrganizer implements Writable {
     }
 
     @Override
-    public JSONObject toJson() { // based on code written in JsonSerializationDemo's model.WorkRoom class' toJson() method
+    public JSONObject toJson() { // based on code written in JsonSerializationDemo's
+                                 // model.WorkRoom class' toJson() method
         JSONObject json = new JSONObject();
         json.put("assignments", assignmentsToJson());
         return json;
