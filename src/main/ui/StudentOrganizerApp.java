@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// based on code written in AccountNotRobust's ui.TellerApp and JsonSerializationDemo's ui.WorkRoomApp
+// based on code written in Teller's ui.TellerApp and JsonSerializationDemo's ui.WorkRoomApp
 // Represents the Student Organizer Application
 public class StudentOrganizerApp {
     private static final String JSON_STORE = "./data/studentorganizer.json";
@@ -23,14 +23,15 @@ public class StudentOrganizerApp {
     private ArrayList<Assignment> sortedAssignments;
 
     // EFFECTS: runs the Student Organizer Application
-    public StudentOrganizerApp() throws FileNotFoundException {
+    public StudentOrganizerApp() throws FileNotFoundException { // based on code written in JsonSerializationDemo's
+                                                                // ui.WorkRoomApp WorkRoomApp() method
         init();
         runApp();
     }
 
     // MODIFIES: this
     // EFFECTS: processes user's input(s) from the main menu
-    private void runApp() {
+    private void runApp() { // based on code written in Teller's ui.TellerApp runTeller() method
         boolean exit = false;
         String command;
 
@@ -50,7 +51,7 @@ public class StudentOrganizerApp {
 
     // MODIFIES: this
     // EFFECTS: initializes StudentOrganizer, Scanner, JsonWriter, and JsonReader objects
-    private void init() {
+    private void init() { // based on code written in Teller's ui.TellerApp init() method
         myStudentOrganizer = new StudentOrganizer();
         input = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -58,7 +59,8 @@ public class StudentOrganizerApp {
     }
 
     // EFFECTS: displays items from the main menu to the user
-    private void displayMainMenu() {
+    private void displayMainMenu() { // based on code written in JsonSerializationDemo's ui.WorkRoomApp
+                                     // displayMenu() method
         System.out.println("\nChoose an item from the menu:");
         System.out.println("\t(a) Add Assignment");
         System.out.println("\t(d) Delete Assignment");
@@ -137,7 +139,7 @@ public class StudentOrganizerApp {
 
     // MODIFIES: this
     // EFFECTS: processes user's input(s) from the Sort Assignments menu
-    private void viewMyAssignments() {
+    private void viewMyAssignments() { // based on code written in Teller's ui.TellerApp runTeller() method
         boolean end = false;
         String command;
 
@@ -163,7 +165,7 @@ public class StudentOrganizerApp {
     }
 
     // EFFECTS: displays different ways assignments can be sorted from the menu to the user
-    private void displaySortAssignmentsMenu() {
+    private void displaySortAssignmentsMenu() { // based on code written in Teller's ui.TellerApp displayMenu() method
         System.out.println("\nHow would you like your assignments to be sorted?");
         System.out.println("\t(1) By course code, all assignments");
         System.out.println("\t(2) By course code, incomplete assignments");
@@ -206,7 +208,8 @@ public class StudentOrganizerApp {
     }
 
     // EFFECTS: saves the Student Organizer to file
-    private void saveStudentOrganizer() {
+    private void saveStudentOrganizer() { // based on code written in JsonSerializationDemo's ui.WorkRoomApp
+                                          // saveWorkRoom() method
         try {
             jsonWriter.open();
             jsonWriter.write(myStudentOrganizer);
@@ -219,7 +222,8 @@ public class StudentOrganizerApp {
 
     // MODIFIES: this
     // EFFECTS: loads Student Organizer from file
-    private void loadStudentOrganizer() {
+    private void loadStudentOrganizer() { // based on code written in JsonSerializationDemo's ui.WorkRoomApp
+                                          // loadWorkRoom() method
         try {
             myStudentOrganizer = jsonReader.read();
             System.out.printf("Loaded Student Organizer from %s\n", JSON_STORE);
