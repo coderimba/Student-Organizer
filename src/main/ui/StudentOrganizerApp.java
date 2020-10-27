@@ -30,7 +30,7 @@ public class StudentOrganizerApp {
 
     // MODIFIES: this
     // EFFECTS: processes user's input(s) from the main menu
-    private void runApp() { // based on code written in ui.TellerApp's runTeller() method
+    private void runApp() {
         boolean exit = false;
         String command;
 
@@ -50,7 +50,7 @@ public class StudentOrganizerApp {
 
     // MODIFIES: this
     // EFFECTS: initializes StudentOrganizer, Scanner, JsonWriter, and JsonReader objects
-    private void init() { // based on code written in ui.TellerApp's init() method
+    private void init() {
         myStudentOrganizer = new StudentOrganizer();
         input = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -58,7 +58,7 @@ public class StudentOrganizerApp {
     }
 
     // EFFECTS: displays items from the main menu to the user
-    private void displayMainMenu() { // based on code written in ui.TellerApp's displayMenu() method
+    private void displayMainMenu() {
         System.out.println("\nChoose an item from the menu:");
         System.out.println("\t(a) Add Assignment");
         System.out.println("\t(d) Delete Assignment");
@@ -137,7 +137,7 @@ public class StudentOrganizerApp {
 
     // MODIFIES: this
     // EFFECTS: processes user's input(s) from the Sort Assignments menu
-    private void viewMyAssignments() { // based on code written in ui.TellerApp's runTeller() method
+    private void viewMyAssignments() {
         boolean end = false;
         String command;
 
@@ -163,7 +163,7 @@ public class StudentOrganizerApp {
     }
 
     // EFFECTS: displays different ways assignments can be sorted from the menu to the user
-    private void displaySortAssignmentsMenu() { // based on code written in ui.TellerApp's displayMenu() method
+    private void displaySortAssignmentsMenu() {
         System.out.println("\nHow would you like your assignments to be sorted?");
         System.out.println("\t(1) By course code, all assignments");
         System.out.println("\t(2) By course code, incomplete assignments");
