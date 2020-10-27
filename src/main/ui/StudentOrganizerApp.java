@@ -2,20 +2,29 @@ package ui;
 
 import model.Assignment;
 import model.StudentOrganizer;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// Student Organizer Application
+// based on code written in AccountNotRobust's ui.TellerApp and JsonSerializationDemo's ui.WorkRoomApp
+// Represents the Student Organizer Application
 public class StudentOrganizerApp {
+    private static final String JSON_STORE = "./data/studentorganizer.json";
     private StudentOrganizer myStudentOrganizer;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
     private String name;
     private String courseCode;
     private ArrayList<Assignment> sortedAssignments;
 
     // EFFECTS: runs the Student Organizer Application
-    public StudentOrganizerApp() { // based on code written in ui.TellerApp's TellerApp() constructor
+    public StudentOrganizerApp() throws FileNotFoundException {
+        init();
         runApp();
     }
 
@@ -24,8 +33,6 @@ public class StudentOrganizerApp {
     private void runApp() { // based on code written in ui.TellerApp's runTeller() method
         boolean exit = false;
         String command;
-
-        init();
 
         while (!exit) {
             displayMainMenu();
@@ -42,10 +49,12 @@ public class StudentOrganizerApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes StudentOrganizer and Scanner objects
+    // EFFECTS: initializes StudentOrganizer, Scanner, JsonWriter, and JsonReader objects
     private void init() { // based on code written in ui.TellerApp's init() method
         myStudentOrganizer = new StudentOrganizer();
         input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS: displays items from the main menu to the user
@@ -55,6 +64,8 @@ public class StudentOrganizerApp {
         System.out.println("\t(d) Delete Assignment");
         System.out.println("\t(m) Mark Assignment Complete");
         System.out.println("\t(v) View Assignments");
+        System.out.println("\t(s) Save Student Organizer to file");
+        System.out.println("\t(l) Load Student Organizer from file");
         System.out.println("\t(e) Exit");
     }
 
@@ -73,6 +84,12 @@ public class StudentOrganizerApp {
                 break;
             case "v":
                 viewMyAssignments();
+                break;
+            case "s":
+                saveStudentOrganizer();
+                break;
+            case "l":
+                loadStudentOrganizer();
                 break;
             default:
                 System.out.println("Invalid selection. Try again.");
@@ -185,6 +202,29 @@ public class StudentOrganizerApp {
     private void printAssignments() {
         for (Assignment a: sortedAssignments) {
             System.out.println(a);
+        }
+    }
+
+    // EFFECTS: saves the Student Organizer to file
+    private void saveStudentOrganizer() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(myStudentOrganizer);
+            jsonWriter.close();
+            System.out.printf("Saved Student Organizer to %s\n", JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.printf("Unable to write to file: %s\n", JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads Student Organizer from file
+    private void loadStudentOrganizer() {
+        try {
+            myStudentOrganizer = jsonReader.read();
+            System.out.printf("Loaded Student Organizer from %s\n", JSON_STORE);
+        } catch (IOException e) {
+            System.out.printf("Unable to read from file: %s\n", JSON_STORE);
         }
     }
 }
