@@ -26,7 +26,10 @@ public class Assignment implements Writable {
         setComplete(false);
     }
 
-    // REQUIRES: only to be used by persistence.JsonReader's addAssignment method
+    // REQUIRES: only to be used by persistence.JsonReader's addAssignment method. name contains at least one letter or
+    // digit. courseCode has a length of 8, following the format of 4 uppercase letters, 1 whitespace, and 3 digits.
+    // dueDate is in the format mm-dd. estimatedHours > 0 and has to be digit(s). For the strings i.e. name, courseCode,
+    // and dueDate, there are no whitespaces before and after the first and last characters, respectively.
     // EFFECTS: constructs an Assignment with a name, a corresponding course, a due date,
     // an estimated number of hours needed for completion, and its completion status
     public Assignment(String name, String courseCode, String dueDate, double estimatedHours, boolean complete) {
