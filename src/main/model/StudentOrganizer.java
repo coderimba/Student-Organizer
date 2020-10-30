@@ -67,32 +67,34 @@ public class StudentOrganizer implements Writable {
 
     // REQUIRES: the StudentOrganizer contains at least one incomplete assignment
     // EFFECTS: returns the incomplete assignments sorted by the due date
-    public ArrayList<Assignment> viewIncompleteAssignmentsByDueDate() {
+    public ArrayList<Assignment> viewIncompleteAssignmentsByDueDate() { // adapted insertion sort algorithm from
+                                                                        // https://www.geeksforgeeks.org/insertion-sort/
         ArrayList<Assignment> incompleteByDueDate = incomplete();
         for (int i = 1; i < incompleteByDueDate.size(); i++) {
             Assignment temp = incompleteByDueDate.get(i);
-            int pos = i;
-            while (pos > 0 && temp.getDueDate().compareTo(incompleteByDueDate.get(pos - 1).getDueDate()) < 0) {
-                incompleteByDueDate.set(pos, incompleteByDueDate.get(pos - 1));
+            int pos = i - 1;
+            while (pos >= 0 && incompleteByDueDate.get(pos).getDueDate().compareTo(temp.getDueDate()) > 0) {
+                incompleteByDueDate.set(pos + 1, incompleteByDueDate.get(pos));
                 pos--;
             }
-            incompleteByDueDate.set(pos, temp);
+            incompleteByDueDate.set(pos + 1, temp);
         }
         return incompleteByDueDate;
     }
 
     // REQUIRES: the StudentOrganizer contains at least one incomplete assignment
     // EFFECTS: returns the incomplete assignments sorted by estimated time for completion
-    public ArrayList<Assignment> viewIncompleteAssignmentsByEstimatedHours() {
+    public ArrayList<Assignment> viewIncompleteAssignmentsByEstimatedHours() { // adapted insertion sort algorithm from
+                                                                        // https://www.geeksforgeeks.org/insertion-sort/
         ArrayList<Assignment> incompleteByEstimatedHours = incomplete();
         for (int i = 1; i < incompleteByEstimatedHours.size(); i++) {
             Assignment temp = incompleteByEstimatedHours.get(i);
-            int pos = i;
-            while (pos > 0 && temp.getEstimatedHours() < incompleteByEstimatedHours.get(pos - 1).getEstimatedHours()) {
-                incompleteByEstimatedHours.set(pos, incompleteByEstimatedHours.get(pos - 1));
+            int pos = i - 1;
+            while (pos >= 0 && incompleteByEstimatedHours.get(pos).getEstimatedHours() > temp.getEstimatedHours()) {
+                incompleteByEstimatedHours.set(pos + 1, incompleteByEstimatedHours.get(pos));
                 pos--;
             }
-            incompleteByEstimatedHours.set(pos, temp);
+            incompleteByEstimatedHours.set(pos + 1, temp);
         }
         return incompleteByEstimatedHours;
     }
@@ -113,17 +115,18 @@ public class StudentOrganizer implements Writable {
     // MODIFIES: ArrayList<Assignment> list (the argument)
     // EFFECTS: sorts list based on course code
     private ArrayList<Assignment> insertionSortByCourseCode(ArrayList<Assignment> list) {
+        // adapted insertion sort algorithm from https://www.geeksforgeeks.org/insertion-sort/
         for (int i = 1; i < list.size(); i++) {
             Assignment temp = list.get(i);
-            int pos = i;
-            while (pos > 0
-                    && !temp.getCourseCode().equals(list.get(pos - 1).getCourseCode())) {
-                    // check that course code of temp assignment does not equal to
-                    // course code of assignment in list at index = pos - 1
-                list.set(pos, list.get(pos - 1));
+            int pos = i - 1;
+            while (pos >= 0
+                    && !list.get(pos).getCourseCode().equals(temp.getCourseCode())) {
+                    // check that course code of assignment in list at current position does not equal to
+                    // course code of temp assignment
+                list.set(pos + 1, list.get(pos));
                 pos--;
             }
-            list.set(pos, temp);
+            list.set(pos + 1, temp);
         }
         return list;
     }

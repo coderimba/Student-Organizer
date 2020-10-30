@@ -28,6 +28,20 @@
         "complete": false
     },
     {
+        "courseCode": "CPSC 121",
+        "dueDate": "11-05",
+        "name": "Pre-lab 7",
+        "estimatedHours": 1,
+        "complete": false
+    },
+    {
+        "courseCode": "CPSC 121",
+        "dueDate": "11-02",
+        "name": "Pre-class quiz 8",
+        "estimatedHours": 3,
+        "complete": false
+    },
+    {
         "courseCode": "CPSC 210",
         "dueDate": "10-30",
         "name": "P2",
@@ -39,6 +53,13 @@
         "dueDate": "10-29",
         "name": "C8 Lecture Ticket",
         "estimatedHours": 0.5,
+        "complete": false
+    },
+    {
+        "courseCode": "CPSC 210",
+        "dueDate": "11-10",
+        "name": "Lab 7",
+        "estimatedHours": 2,
         "complete": false
     }
 ]}
