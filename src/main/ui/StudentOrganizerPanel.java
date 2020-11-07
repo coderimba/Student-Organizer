@@ -21,6 +21,7 @@ import java.io.IOException;
 // Represents the Student Organizer's panel
 public class StudentOrganizerPanel extends JPanel implements ListSelectionListener, ActionListener {
     private JList studentOrganizerList;
+    private static JFrame frame;
     private DefaultListModel studentOrganizerModel;
     private StudentOrganizer myStudentOrganizer;
     private JsonWriter jsonWriter;
@@ -40,20 +41,18 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
 
         init();
 
-        studentOrganizerList = new JList(studentOrganizerModel);
         studentOrganizerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        studentOrganizerList.setSelectedIndex(0);
         studentOrganizerList.addListSelectionListener(this);
         studentOrganizerList.setVisibleRowCount(5);
         JScrollPane studentOrganizerScrollPane = new JScrollPane(studentOrganizerList);
 
-        markCompleteButton = new JButton(markCompleteString);
         markCompleteButton.setActionCommand(markCompleteString);
         markCompleteButton.addActionListener(new MarkCompleteListener());
+        markCompleteButton.setEnabled(false);
 
-        deleteButton = new JButton(deleteString);
         deleteButton.setActionCommand(deleteString);
         deleteButton.addActionListener(new DeleteListener());
+        deleteButton.setEnabled(false);
 
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
@@ -75,21 +74,42 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         myStudentOrganizer = new StudentOrganizer();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
+        studentOrganizerList = new JList(studentOrganizerModel);
+        markCompleteButton = new JButton(markCompleteString);
+        deleteButton = new JButton(deleteString);
     }
 
     public void loadAssignments() {
+        if (studentOrganizerModel.getSize() > 0) {
+            studentOrganizerModel.removeAllElements();
+        }
         loadStudentOrganizer();
         for (Assignment a: myStudentOrganizer.viewAllAssignmentsByCourseCode()) {
             studentOrganizerModel.addElement(a);
         }
+        studentOrganizerList.setSelectedIndex(0);
+        frame.pack();
     }
 
     private class MarkCompleteListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = studentOrganizerList.getSelectedIndex();
-            Assignment assignment = (Assignment) studentOrganizerModel.elementAt(index);
+            Assignment assignment = (Assignment) studentOrganizerModel.getElementAt(index);
             assignment.markComplete();
+            studentOrganizerList.updateUI();
+
+            int size = studentOrganizerModel.getSize();
+
+            if (size == 0) {
+                markCompleteButton.setEnabled(false);
+            } else {
+                if (index == studentOrganizerModel.getSize()) {
+                    index--;
+                }
+                studentOrganizerList.setSelectedIndex(index);
+                studentOrganizerList.ensureIndexIsVisible(index);
+            }
         }
     }
 
@@ -97,6 +117,8 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = studentOrganizerList.getSelectedIndex();
+            Assignment assignment = (Assignment) studentOrganizerModel.getElementAt(index);
+            myStudentOrganizer.deleteAssignment(assignment.getName(), assignment.getCourseCode());
             studentOrganizerModel.remove(index);
 
             int size = studentOrganizerModel.getSize();
@@ -118,8 +140,10 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         if (e.getValueIsAdjusting() == false) {
 
             if (studentOrganizerList.getSelectedIndex() == -1) {
+                markCompleteButton.setEnabled(false);
                 deleteButton.setEnabled(false);
             } else {
+                markCompleteButton.setEnabled(true);
                 deleteButton.setEnabled(true);
             }
 
@@ -191,7 +215,7 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
 
     private static void createAndShowGUI() { // uses both List and Menu createAndShowGUI methods
         //Create and set up the window.
-        JFrame frame = new JFrame("ListDemo");
+        frame = new JFrame("Student Organizer App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.

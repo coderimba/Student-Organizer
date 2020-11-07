@@ -1,16 +1,16 @@
 {"assignments": [
     {
-        "courseCode": "MATH 200",
-        "dueDate": "11-01",
-        "name": "A7",
-        "estimatedHours": 4,
-        "complete": false
+        "courseCode": "CPSC 210",
+        "dueDate": "10-30",
+        "name": "P2",
+        "estimatedHours": 6,
+        "complete": true
     },
     {
-        "courseCode": "ECON 101",
-        "dueDate": "11-01",
-        "name": "Quiz 7",
-        "estimatedHours": 0.75,
+        "courseCode": "CPSC 210",
+        "dueDate": "11-10",
+        "name": "Lab 7",
+        "estimatedHours": 2,
         "complete": false
     },
     {
@@ -18,7 +18,7 @@
         "dueDate": "10-28",
         "name": "A3",
         "estimatedHours": 6,
-        "complete": false
+        "complete": true
     },
     {
         "courseCode": "CPSC 121",
@@ -42,24 +42,17 @@
         "complete": false
     },
     {
-        "courseCode": "CPSC 210",
-        "dueDate": "10-30",
-        "name": "P2",
-        "estimatedHours": 6,
+        "courseCode": "ECON 101",
+        "dueDate": "11-01",
+        "name": "Quiz 7",
+        "estimatedHours": 0.75,
         "complete": true
     },
     {
-        "courseCode": "CPSC 210",
-        "dueDate": "10-29",
-        "name": "C8 Lecture Ticket",
-        "estimatedHours": 0.5,
-        "complete": false
-    },
-    {
-        "courseCode": "CPSC 210",
-        "dueDate": "11-10",
-        "name": "Lab 7",
-        "estimatedHours": 2,
-        "complete": false
+        "courseCode": "MATH 200",
+        "dueDate": "11-01",
+        "name": "A7",
+        "estimatedHours": 4,
+        "complete": true
     }
 ]}
