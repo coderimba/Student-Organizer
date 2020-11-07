@@ -11,14 +11,15 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 // based on code written in components-ListDemoProject's components.ListDemo
-// as found in https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html
+// and components-MenuDemoProject's components.MenuDemo as found in
+// https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html
 // Represents the Student Organizer's panel
-public class StudentOrganizerPanel extends JPanel implements ListSelectionListener {
+public class StudentOrganizerPanel extends JPanel implements ListSelectionListener, ActionListener {
     private JList studentOrganizerList;
     private DefaultListModel studentOrganizerModel;
     private StudentOrganizer myStudentOrganizer;
@@ -31,11 +32,13 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
     private JButton markCompleteButton;
     private JButton deleteButton;
 
+    private static final String loadData = "Load Data";
+    private static final String saveData = "Save Data";
+
     public StudentOrganizerPanel() {
         super(new BorderLayout());
 
         init();
-        loadAssignments();
 
         studentOrganizerList = new JList(studentOrganizerModel);
         studentOrganizerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -65,13 +68,6 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         add(buttonPane, BorderLayout.PAGE_END);
     }
 
-    public void loadAssignments() {
-        loadStudentOrganizer();
-        for (Assignment a: myStudentOrganizer.viewAllAssignmentsByCourseCode()) {
-            studentOrganizerModel.addElement(a);
-        }
-    }
-
     // MODIFIES: this
     // EFFECTS: initializes DefaultListModel, StudentOrganizer, JsonWriter, and JsonReader objects
     private void init() { // based on code written in Teller's ui.TellerApp init() method
@@ -81,28 +77,10 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         jsonReader = new JsonReader(JSON_STORE);
     }
 
-    // MODIFIES: this
-    // EFFECTS: loads Student Organizer from file
-    private void loadStudentOrganizer() { // based on code written in JsonSerializationDemo's ui.WorkRoomApp
-                                          // loadWorkRoom() method
-        try {
-            myStudentOrganizer = jsonReader.read();
-            System.out.printf("Loaded Student Organizer from %s\n", JSON_STORE);
-        } catch (IOException e) {
-            System.out.printf("Unable to read from file: %s\n", JSON_STORE);
-        }
-    }
-
-    // EFFECTS: saves the Student Organizer to file
-    private void saveStudentOrganizer() { // based on code written in JsonSerializationDemo's ui.WorkRoomApp
-        // saveWorkRoom() method
-        try {
-            jsonWriter.open();
-            jsonWriter.write(myStudentOrganizer);
-            jsonWriter.close();
-            System.out.printf("Saved Student Organizer to %s\n", JSON_STORE);
-        } catch (FileNotFoundException e) {
-            System.out.printf("Unable to write to file: %s\n", JSON_STORE);
+    public void loadAssignments() {
+        loadStudentOrganizer();
+        for (Assignment a: myStudentOrganizer.viewAllAssignmentsByCourseCode()) {
+            studentOrganizerModel.addElement(a);
         }
     }
 
@@ -146,5 +124,95 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
             }
 
         }
+    }
+
+    public JMenuBar createMenuBar() {
+        JMenuBar menuBar;
+        JMenu menu;
+        JMenuItem menuItem;
+
+        menuBar = new JMenuBar();
+
+        menu = new JMenu("Menu");
+        menu.setMnemonic(KeyEvent.VK_M);
+        menu.getAccessibleContext().setAccessibleDescription("The only menu in this program"); // remove if unnecessary
+        menuBar.add(menu);
+
+        menuItem = new JMenuItem(loadData, KeyEvent.VK_L);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem(saveData, KeyEvent.VK_S);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+
+        return menuBar;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JMenuItem source = (JMenuItem) e.getSource();
+        switch (source.getText()) {
+            case loadData:
+                loadAssignments();
+                break;
+            case saveData:
+                saveStudentOrganizer();
+                break;
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads Student Organizer from file
+    private void loadStudentOrganizer() { // based on code written in JsonSerializationDemo's ui.WorkRoomApp
+        // loadWorkRoom() method
+        try {
+            myStudentOrganizer = jsonReader.read();
+            System.out.printf("Loaded Student Organizer from %s\n", JSON_STORE);
+        } catch (IOException e) {
+            System.out.printf("Unable to read from file: %s\n", JSON_STORE);
+        }
+    }
+
+    // EFFECTS: saves the Student Organizer to file
+    private void saveStudentOrganizer() { // based on code written in JsonSerializationDemo's ui.WorkRoomApp
+        // saveWorkRoom() method
+        try {
+            jsonWriter.open();
+            jsonWriter.write(myStudentOrganizer);
+            jsonWriter.close();
+            System.out.printf("Saved Student Organizer to %s\n", JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.printf("Unable to write to file: %s\n", JSON_STORE);
+        }
+    }
+
+    private static void createAndShowGUI() { // uses both List and Menu createAndShowGUI methods
+        //Create and set up the window.
+        JFrame frame = new JFrame("ListDemo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Create and set up the content pane.
+        StudentOrganizerPanel studentOrganizerPanel = new StudentOrganizerPanel();
+        frame.setJMenuBar(studentOrganizerPanel.createMenuBar());
+        JComponent newContentPane = studentOrganizerPanel;
+        newContentPane.setOpaque(true); //content panes must be opaque
+        frame.setContentPane(newContentPane);
+
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) { // uses List/Menu main method
+        //Schedule a job for the event-dispatching thread:
+        //creating and showing this application's GUI.
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                createAndShowGUI();
+            }
+        });
     }
 }
