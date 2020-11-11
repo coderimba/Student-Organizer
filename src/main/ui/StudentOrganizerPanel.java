@@ -16,8 +16,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // based on code written in components-ListDemoProject's components.ListDemo
-// and components-MenuDemoProject's components.MenuDemo as found in
-// https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html
+// https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
+// and components-MenuDemoProject's components.MenuDemo
+// https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/MenuDemoProject/src/components/MenuDemo.java
 // Represents the Student Organizer's panel
 public class StudentOrganizerPanel extends JPanel implements ListSelectionListener, ActionListener {
     private JList studentOrganizerList;
@@ -36,7 +37,12 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
     private static final String loadData = "Load Data";
     private static final String saveData = "Save Data";
 
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
     public StudentOrganizerPanel() {
+        // based on code written in components-ListDemoProject's components.ListDemo ListDemo() constructor
+        // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
         super(new BorderLayout());
 
         init();
@@ -68,8 +74,13 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes DefaultListModel, StudentOrganizer, JsonWriter, and JsonReader objects
-    private void init() { // based on code written in Teller's ui.TellerApp init() method
+    // EFFECTS: initializes DefaultListModel, StudentOrganizer, JsonWriter, JsonReader, JList, markCompleteButton,
+    //          and deleteButton objects
+    private void init() {
+        // based on code written in Teller's ui.TellerApp init() method https://github.students.cs.ubc.ca/CPSC210/TellerApp,
+        // JsonSerializationDemo's ui.WorkRoomApp WorkRoomApp() constructor https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo,
+        // and components-ListDemoProject's components.ListDemo ListDemo() constructor
+        // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
         studentOrganizerModel = new DefaultListModel();
         myStudentOrganizer = new StudentOrganizer();
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -79,7 +90,12 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         deleteButton = new JButton(deleteString);
     }
 
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
     public void loadAssignments() {
+        // based on code written in components-ListDemoProject's components.ListDemo ListDemo() constructor
+        // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
         if (studentOrganizerModel.getSize() > 0) {
             studentOrganizerModel.removeAllElements();
         }
@@ -91,9 +107,14 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         frame.pack();
     }
 
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
     private class MarkCompleteListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e) { // based on code written in components-ListDemoProject's
+                                            // components.ListDemo FireListener class' actionPerformed method
+            // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
             int index = studentOrganizerList.getSelectedIndex();
             Assignment assignment = (Assignment) studentOrganizerModel.getElementAt(index);
             assignment.markComplete();
@@ -113,9 +134,14 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         }
     }
 
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
     private class DeleteListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e) { // based on code written in components-ListDemoProject's
+                                            // components.ListDemo FireListener class' actionPerformed method
+            // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
             int index = studentOrganizerList.getSelectedIndex();
             Assignment assignment = (Assignment) studentOrganizerModel.getElementAt(index);
             myStudentOrganizer.deleteAssignment(assignment.getName(), assignment.getCourseCode());
@@ -135,8 +161,13 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         }
     }
 
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
     @Override
     public void valueChanged(ListSelectionEvent e) {
+        // based on code written in components-ListDemoProject's components.ListDemo valueChanged method
+        // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
         if (e.getValueIsAdjusting() == false) {
 
             if (studentOrganizerList.getSelectedIndex() == -1) {
@@ -150,7 +181,12 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         }
     }
 
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
     public JMenuBar createMenuBar() {
+        // based on code written in components-MenuDemoProject's components.MenuDemo createMenuBar() method
+        // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/MenuDemoProject/src/components/MenuDemo.java
         JMenuBar menuBar;
         JMenu menu;
         JMenuItem menuItem;
@@ -175,8 +211,13 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         return menuBar;
     }
 
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
     @Override
     public void actionPerformed(ActionEvent e) {
+        // based on code written in components-MenuDemoProject's components.MenuDemo actionPerformed method
+        // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/MenuDemoProject/src/components/MenuDemo.java
         JMenuItem source = (JMenuItem) e.getSource();
         switch (source.getText()) {
             case loadData:
@@ -191,7 +232,7 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
     // MODIFIES: this
     // EFFECTS: loads Student Organizer from file
     private void loadStudentOrganizer() { // based on code written in JsonSerializationDemo's ui.WorkRoomApp
-        // loadWorkRoom() method
+        // loadWorkRoom() method https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
         try {
             myStudentOrganizer = jsonReader.read();
             System.out.printf("Loaded Student Organizer from %s\n", JSON_STORE);
@@ -202,7 +243,7 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
 
     // EFFECTS: saves the Student Organizer to file
     private void saveStudentOrganizer() { // based on code written in JsonSerializationDemo's ui.WorkRoomApp
-        // saveWorkRoom() method
+        // saveWorkRoom() method https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
         try {
             jsonWriter.open();
             jsonWriter.write(myStudentOrganizer);
@@ -213,7 +254,14 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         }
     }
 
-    private static void createAndShowGUI() { // uses both List and Menu createAndShowGUI methods
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
+    private static void createAndShowGUI() {
+        // based on code in the createAndShowGUI() method as found in components-ListDemoProject's components.ListDemo
+        // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
+        // and components-MenuDemoProject's components.MenuDemo
+        // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/MenuDemoProject/src/components/MenuDemo.java
         //Create and set up the window.
         frame = new JFrame("Student Organizer App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -230,7 +278,12 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) { // uses List/Menu main method
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
+    public static void main(String[] args) {
+        // code extracted from components-ListDemoProject's components.ListDemo main method
+        // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {

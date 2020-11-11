@@ -51,7 +51,8 @@ public class StudentOrganizerApp {
 
     // MODIFIES: this
     // EFFECTS: initializes StudentOrganizer, Scanner, JsonWriter, and JsonReader objects
-    private void init() { // based on code written in Teller's ui.TellerApp init() method
+    private void init() { // based on code written in Teller's ui.TellerApp init() method and
+                          // JsonSerializationDemo's ui.WorkRoomApp WorkRoomApp() constructor
         myStudentOrganizer = new StudentOrganizer();
         input = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);
