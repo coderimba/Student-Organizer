@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 // Represents a reader that reads student organizer from JSON data stored in file
 public class JsonReader { // based on code written in JsonSerializationDemo's persistence.JsonReader class
+                          // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     private String source;
 
     // EFFECTS: constructs reader to read from source file

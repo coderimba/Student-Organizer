@@ -95,6 +95,7 @@ public class Assignment implements Writable {
 
     @Override
     public JSONObject toJson() { // based on code written in JsonSerializationDemo's model.Thingy class' toJson() method
+                                 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
         JSONObject json = new JSONObject();
         json.put("name", getName());
         json.put("courseCode", getCourseCode());

@@ -137,8 +137,8 @@ public class StudentOrganizer implements Writable {
     }
 
     @Override
-    public JSONObject toJson() { // based on code written in JsonSerializationDemo's
-                                 // model.WorkRoom class' toJson() method
+    public JSONObject toJson() { // based on code written in JsonSerializationDemo's model.WorkRoom class'
+                        // toJson() method https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
         JSONObject json = new JSONObject();
         json.put("assignments", assignmentsToJson());
         return json;
@@ -146,7 +146,7 @@ public class StudentOrganizer implements Writable {
 
     // EFFECTS: returns assignments in this student organizer as a JSON array
     private JSONArray assignmentsToJson() { // based on code written in JsonSerializationDemo's model.WorkRoom class'
-                                            // thingiesToJson() method
+                            // thingiesToJson() method https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
         JSONArray jsonArray = new JSONArray();
 
         for (Assignment a: studentOrganizer) {
