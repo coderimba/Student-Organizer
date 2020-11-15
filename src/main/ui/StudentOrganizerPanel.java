@@ -115,6 +115,8 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         public void actionPerformed(ActionEvent e) { // based on code written in components-ListDemoProject's
                                             // components.ListDemo FireListener class' actionPerformed method
             // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
+            beep();
+
             int index = studentOrganizerList.getSelectedIndex();
             Assignment assignment = (Assignment) studentOrganizerModel.getElementAt(index);
             assignment.markComplete();
@@ -142,6 +144,8 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         public void actionPerformed(ActionEvent e) { // based on code written in components-ListDemoProject's
                                             // components.ListDemo FireListener class' actionPerformed method
             // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
+            beep();
+
             int index = studentOrganizerList.getSelectedIndex();
             Assignment assignment = (Assignment) studentOrganizerModel.getElementAt(index);
             myStudentOrganizer.deleteAssignment(assignment.getName(), assignment.getCourseCode());
@@ -218,6 +222,7 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
     public void actionPerformed(ActionEvent e) {
         // based on code written in components-MenuDemoProject's components.MenuDemo actionPerformed method
         // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/MenuDemoProject/src/components/MenuDemo.java
+        beep();
         JMenuItem source = (JMenuItem) e.getSource();
         switch (source.getText()) {
             case loadData:
@@ -252,6 +257,12 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         } catch (FileNotFoundException e) {
             System.out.printf("Unable to write to file: %s\n", JSON_STORE);
         }
+    }
+
+    // EFFECTS: plays a beep sound
+    public void beep() { // code extracted from Beeper.java's actionPerformed method
+        // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/events/BeeperProject/src/events/Beeper.java
+        Toolkit.getDefaultToolkit().beep();
     }
 
     // REQUIRES:
