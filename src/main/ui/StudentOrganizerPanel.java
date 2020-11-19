@@ -37,9 +37,12 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
     private static final String loadData = "Load Data";
     private static final String saveData = "Save Data";
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // MODIFIES: this
+    // EFFECTS: creates the panel's border, sets the studentOrganizerList's selection model as single selection,
+    // initializes studentOrganizerScrollPane, creates and disenables markComplete and delete buttons, initializes
+    // button pane and adds the markComplete and delete buttons there. Centralizes studentOrganizerScrollPane and
+    // places the button pane at the bottom of the panel. Adds appropriate listeners for studentOrganizerList,
+    // markComplete, and delete buttons
     public StudentOrganizerPanel() {
         // based on code written in components-ListDemoProject's components.ListDemo ListDemo() constructor
         // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
@@ -49,7 +52,6 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
 
         studentOrganizerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         studentOrganizerList.addListSelectionListener(this);
-        studentOrganizerList.setVisibleRowCount(5);
         JScrollPane studentOrganizerScrollPane = new JScrollPane(studentOrganizerList);
 
         markCompleteButton.setActionCommand(markCompleteString);
@@ -90,9 +92,10 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         deleteButton = new JButton(deleteString);
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // MODIFIES: this
+    // EFFECTS: if studentOrganizerModel's size is greater than 0, remove all its elements. Adds all assignments from
+    // myStudentOrganizer to studentOrganizerModel, arranged by course code. Sets studentOrganizerList to select first
+    // element by default and view three more rows than the number of elements in studentOrganizerModel
     public void loadAssignments() {
         // based on code written in components-ListDemoProject's components.ListDemo ListDemo() constructor
         // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
@@ -104,12 +107,12 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
             studentOrganizerModel.addElement(a);
         }
         studentOrganizerList.setSelectedIndex(0);
+        studentOrganizerList.setVisibleRowCount(myStudentOrganizer.size() + 3);
         frame.pack();
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // MODIFIES: this
+    // EFFECTS: marks the selected assignment as complete and shows the updated studentOrganizerList accordingly
     private class MarkCompleteListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) { // based on code written in components-ListDemoProject's
@@ -121,24 +124,13 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
             Assignment assignment = (Assignment) studentOrganizerModel.getElementAt(index);
             assignment.markComplete();
             studentOrganizerList.updateUI();
-
-            int size = studentOrganizerModel.getSize();
-
-            if (size == 0) {
-                markCompleteButton.setEnabled(false);
-            } else {
-                if (index == studentOrganizerModel.getSize()) {
-                    index--;
-                }
-                studentOrganizerList.setSelectedIndex(index);
-                studentOrganizerList.ensureIndexIsVisible(index);
-            }
         }
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // MODIFIES: this
+    // EFFECTS: deletes the selected assignment. If the studentOrganizerModel's size is zero as a result, disenable
+    // delete and markComplete buttons. Else, if the deleted assignment occupied the last index, set the selected index
+    // to one less than the index of the deleted assignment, or to the currently selected index if that is not the case
     private class DeleteListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) { // based on code written in components-ListDemoProject's
@@ -155,6 +147,7 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
 
             if (size == 0) {
                 deleteButton.setEnabled(false);
+                markCompleteButton.setEnabled(false);
             } else {
                 if (index == studentOrganizerModel.getSize()) {
                     index--;
@@ -165,9 +158,9 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         }
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // MODIFIES: this
+    // EFFECTS: if no changes to values are being made to the studentOrganizerList, disenable the markComplete and
+    // delete buttons if no item is being selected, otherwise enable the buttons
     @Override
     public void valueChanged(ListSelectionEvent e) {
         // based on code written in components-ListDemoProject's components.ListDemo valueChanged method
@@ -185,9 +178,7 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         }
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // EFFECTS: creates a menu bar, a menu titled "Menu", and two menu items, namely "Load Data" and "Save Data"
     public JMenuBar createMenuBar() {
         // based on code written in components-MenuDemoProject's components.MenuDemo createMenuBar() method
         // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/MenuDemoProject/src/components/MenuDemo.java
@@ -199,7 +190,7 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
 
         menu = new JMenu("Menu");
         menu.setMnemonic(KeyEvent.VK_M);
-        menu.getAccessibleContext().setAccessibleDescription("The only menu in this program"); // remove if unnecessary
+        menu.getAccessibleContext().setAccessibleDescription("The only menu in this program");
         menuBar.add(menu);
 
         menuItem = new JMenuItem(loadData, KeyEvent.VK_L);
@@ -215,9 +206,8 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         return menuBar;
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // EFFECTS: calls loadAssignments() method when the "Load Data" menu item is triggered, or
+    // calls saveStudentOrganizer() method when the "Save Data" menu item is triggered
     @Override
     public void actionPerformed(ActionEvent e) {
         // based on code written in components-MenuDemoProject's components.MenuDemo actionPerformed method
@@ -265,9 +255,9 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         Toolkit.getDefaultToolkit().beep();
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // MODIFIES: this
+    // EFFECTS: initializes frame, titled "Student Organizer App". Creates a studentOrganizerPanel and adds the menu bar
+    // and content pane such that they are in view
     private static void createAndShowGUI() {
         // based on code in the createAndShowGUI() method as found in components-ListDemoProject's components.ListDemo
         // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
@@ -289,9 +279,7 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
         frame.setVisible(true);
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // EFFECTS: runs StudentOrganizerPanel
     public static void main(String[] args) {
         // code extracted from components-ListDemoProject's components.ListDemo main method
         // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
