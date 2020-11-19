@@ -16,13 +16,6 @@
     {
         "courseCode": "CPSC 121",
         "dueDate": "11-16",
-        "name": "A4",
-        "estimatedHours": 6,
-        "complete": true
-    },
-    {
-        "courseCode": "CPSC 121",
-        "dueDate": "11-16",
         "name": "Pre-class Quiz 10",
         "estimatedHours": 3,
         "complete": true
@@ -39,7 +32,7 @@
         "dueDate": "11-20",
         "name": "Phase 3",
         "estimatedHours": 12,
-        "complete": false
+        "complete": true
     },
     {
         "courseCode": "CPSC 210",

@@ -96,7 +96,7 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
     // EFFECTS: if studentOrganizerModel's size is greater than 0, remove all its elements. Adds all assignments from
     // myStudentOrganizer to studentOrganizerModel, arranged by course code. Sets studentOrganizerList to select first
     // element by default and view three more rows than the number of elements in studentOrganizerModel
-    public void loadAssignments() {
+    private void loadAssignments() {
         // based on code written in components-ListDemoProject's components.ListDemo ListDemo() constructor
         // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
         if (studentOrganizerModel.getSize() > 0) {
@@ -179,7 +179,7 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
     }
 
     // EFFECTS: creates a menu bar, a menu titled "Menu", and two menu items, namely "Load Data" and "Save Data"
-    public JMenuBar createMenuBar() {
+    private JMenuBar createMenuBar() {
         // based on code written in components-MenuDemoProject's components.MenuDemo createMenuBar() method
         // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/MenuDemoProject/src/components/MenuDemo.java
         JMenuBar menuBar;
@@ -250,7 +250,7 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
     }
 
     // EFFECTS: plays a beep sound
-    public void beep() { // code extracted from Beeper.java's actionPerformed method
+    private void beep() { // code extracted from Beeper.java's actionPerformed method
         // https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/events/BeeperProject/src/events/Beeper.java
         Toolkit.getDefaultToolkit().beep();
     }
