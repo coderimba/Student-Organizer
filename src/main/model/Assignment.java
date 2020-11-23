@@ -19,8 +19,7 @@ public class Assignment implements Writable {
     // EFFECTS: constructs an Assignment with a name, a corresponding course, a due date,
     // an estimated number of hours needed for completion, and it is marked as incomplete by default.
     public Assignment(String name, String courseCode, String dueDate, double estimatedHours)
-            throws NameException, CourseCodeException, DueDateException, EstimatedHoursException,
-            NumberFormatException {
+            throws NameException, CourseCodeException, DueDateException, EstimatedHoursException {
         setName(name);
         setCourseCode(courseCode);
         setDueDate(dueDate);
@@ -31,8 +30,7 @@ public class Assignment implements Writable {
     // EFFECTS: constructs an Assignment with a name, a corresponding course, a due date,
     // an estimated number of hours needed for completion, and its completion status.
     public Assignment(String name, String courseCode, String dueDate, double estimatedHours, boolean complete)
-            throws NameException, CourseCodeException, DueDateException, EstimatedHoursException,
-            NumberFormatException {
+            throws NameException, CourseCodeException, DueDateException, EstimatedHoursException {
         setName(name);
         setCourseCode(courseCode);
         setDueDate(dueDate);
@@ -52,10 +50,10 @@ public class Assignment implements Writable {
 
     // EFFECTS: name must contain at least one letter or digit, otherwise NameException is thrown.
     public void setName(String name) throws NameException {
-        name.trim();
+        String trimmedName = name.trim();
         boolean validName = false;
-        for (int i = 0; i < name.length(); i++) {
-            if (Character.isLetterOrDigit(name.charAt(i))) {
+        for (int i = 0; i < trimmedName.length(); i++) {
+            if (Character.isLetterOrDigit(trimmedName.charAt(i))) {
                 validName = true;
             }
             if (validName) {
@@ -63,7 +61,7 @@ public class Assignment implements Writable {
             }
         }
         if (validName) {
-            this.name = name;
+            this.name = trimmedName;
         } else {
             throw new NameException();
         }
@@ -77,32 +75,25 @@ public class Assignment implements Writable {
     // excluding any whitespace before or after the first and last characters, respectively (e.g. " Cpsc 210 " is
     // acceptable), otherwise CourseCodeException is thrown.
     public void setCourseCode(String courseCode) throws CourseCodeException {
-        courseCode.toUpperCase().trim();
-        boolean validCourseCode = true;
-        if (courseCode.length() != 8) {
+        String trimmedCourseCode = courseCode.toUpperCase().trim();
+        if (trimmedCourseCode.length() != 8) {
             throw new CourseCodeException();
         }
         for (int i = 0; i < 4; i++) {
-            if (!Character.isLetter(courseCode.charAt(i))) {
-                validCourseCode = false;
-            }
-            if (!validCourseCode) {
+            if (!Character.isLetter(trimmedCourseCode.charAt(i))) {
                 throw new CourseCodeException();
             }
         }
-        if (courseCode.charAt(4) != 32) { // checking if the char at index 4 is a whitespace; referenced ASCII Table
-                                            // from here: http://www.asciitable.com/
+        if (trimmedCourseCode.charAt(4) != 32) { // checking if the char at index 4 is a whitespace;
+                                    // referenced ASCII Table from here: http://www.asciitable.com/
             throw new CourseCodeException();
         }
         for (int i = 5; i < 8; i++) {
-            if (!Character.isDigit(courseCode.charAt(i))) {
-                validCourseCode = false;
-            }
-            if (!validCourseCode) {
+            if (!Character.isDigit(trimmedCourseCode.charAt(i))) {
                 throw new CourseCodeException();
             }
         }
-        this.courseCode = courseCode;
+        this.courseCode = trimmedCourseCode;
     }
 
     public String getDueDate() {
@@ -112,17 +103,17 @@ public class Assignment implements Writable {
     // EFFECTS: dueDate must be in the format mm-dd and has to be valid (e.g. 13-10 or 02-30 are invalid) otherwise
     // DueDateException is thrown (whitespace is allowed before and after the first and last characters of the string).
     public void setDueDate(String dueDate) throws DueDateException {
-        dueDate.trim();
+        String trimmedDueDate = dueDate.trim();
         int month;
         int day;
-        if (dueDate.length() != 5 || dueDate.charAt(2) != 45) { // checking length of dueDate and if the char at index 2
-                                                                // is a hyphen; referenced ASCII Table from here:
-                                                                // http://www.asciitable.com/
+        if (trimmedDueDate.length() != 5 || trimmedDueDate.charAt(2) != 45) {
+            // checking length of dueDate and if the char at index 2 is a hyphen;
+            // referenced ASCII Table from here: http://www.asciitable.com/
             throw new DueDateException();
         }
         try {
-            month = Integer.parseInt(dueDate.substring(0,2));
-            day = Integer.parseInt(dueDate.substring(3));
+            month = Integer.parseInt(trimmedDueDate.substring(0,2));
+            day = Integer.parseInt(trimmedDueDate.substring(3));
         } catch (NumberFormatException e) {
             throw new DueDateException();
         }
@@ -136,16 +127,15 @@ public class Assignment implements Writable {
                                                                                     // are valid
             throw new DueDateException();
         }
-        this.dueDate = dueDate;
+        this.dueDate = trimmedDueDate;
     }
 
     public double getEstimatedHours() {
         return estimatedHours;
     }
 
-    // EFFECTS: estimatedHours must be greater than zero, otherwise EstimatedHoursException is thrown. If estimatedHours
-    // is not digit(s), throw NumberFormatException
-    public void setEstimatedHours(double estimatedHours) throws EstimatedHoursException, NumberFormatException {
+    // EFFECTS: estimatedHours must be greater than zero, otherwise EstimatedHoursException is thrown
+    public void setEstimatedHours(double estimatedHours) throws EstimatedHoursException {
         if (estimatedHours <= 0) {
             throw new EstimatedHoursException();
         }

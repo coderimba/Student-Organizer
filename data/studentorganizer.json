@@ -11,7 +11,7 @@
         "dueDate": "11-22",
         "name": "Quiz 10",
         "estimatedHours": 0.75,
-        "complete": false
+        "complete": true
     },
     {
         "courseCode": "CPSC 121",
@@ -25,6 +25,13 @@
         "dueDate": "11-19",
         "name": "Pre-lab 8",
         "estimatedHours": 2,
+        "complete": false
+    },
+    {
+        "courseCode": "CPSC 121",
+        "dueDate": "12-02",
+        "name": "A5",
+        "estimatedHours": 6,
         "complete": false
     },
     {

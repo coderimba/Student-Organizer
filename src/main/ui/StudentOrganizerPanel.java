@@ -2,6 +2,10 @@ package ui;
 
 import model.Assignment;
 import model.StudentOrganizer;
+import model.exceptions.CourseCodeException;
+import model.exceptions.DueDateException;
+import model.exceptions.EstimatedHoursException;
+import model.exceptions.NameException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -233,6 +237,14 @@ public class StudentOrganizerPanel extends JPanel implements ListSelectionListen
             System.out.printf("Loaded Student Organizer from %s\n", JSON_STORE);
         } catch (IOException e) {
             System.out.printf("Unable to read from file: %s\n", JSON_STORE);
+        } catch (NameException e) {
+            System.out.println("Invalid assignment in file; NameException thrown");
+        } catch (CourseCodeException e) {
+            System.out.println("Invalid assignment in file; CourseCodeException thrown");
+        } catch (DueDateException e) {
+            System.out.println("Invalid assignment in file; DueDateException thrown");
+        } catch (EstimatedHoursException e) {
+            System.out.println("Invalid assignment in file; EstimatedHoursException thrown");
         }
     }
 

@@ -22,3 +22,11 @@ Start using *Student Organizer* today and **never miss a deadline again!**
 - As a user, I want to be able to view the list of incomplete assignments sorted by estimated time for completion in my student organizer
 - As a user, I want to be able to save my student organizer to file
 - As a user, I want to be able to load my student organizer from file
+
+## Phase 4: Task 2
+- Chose to test and design the Assignment class in the model package such that it is robust
+- The methods with a robust design in the Assignment class are:
+    - setName(String name)
+    - setCourseCode(String courseCode)
+    - setDueDate(String dueDate)
+    - setEstimatedHours(double estimatedHours)

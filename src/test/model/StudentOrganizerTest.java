@@ -1,5 +1,9 @@
 package model;
 
+import model.exceptions.CourseCodeException;
+import model.exceptions.DueDateException;
+import model.exceptions.EstimatedHoursException;
+import model.exceptions.NameException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +25,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testAddAssignment() {
+    public void testAddAssignment() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06", 2);
         testStudentOrganizer.addAssignment(a1);
         assertEquals(1, testStudentOrganizer.size());
@@ -32,7 +36,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testDeleteAssignment() {
+    public void testDeleteAssignment() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06", 2);
         testStudentOrganizer.addAssignment(a1);
         Assignment a2 = new Assignment(" Lab 5 ", " Cpsc 210 ", " 10-20 ", 2);
@@ -49,7 +53,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testMarkAssignmentComplete() {
+    public void testMarkAssignmentComplete() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06".toString(), 2);
         testStudentOrganizer.addAssignment(a1);
         Assignment a2 = new Assignment(" Lab 5 ", " Cpsc 210 ", " 10-20 ", 2);
@@ -66,7 +70,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testViewAllAssignmentsByCourseCodeOneAssignment() {
+    public void testViewAllAssignmentsByCourseCodeOneAssignment() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06", 2);
         testStudentOrganizer.addAssignment(a1);
 
@@ -76,7 +80,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testViewAllAssignmentsByCourseCodeManyAssignmentsSameCourseCode() {
+    public void testViewAllAssignmentsByCourseCodeManyAssignmentsSameCourseCode() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06", 2);
         testStudentOrganizer.addAssignment(a1);
         Assignment a2 = new Assignment(" Lab 5 ", " Cpsc 210 ", " 10-20 ", 2);
@@ -91,7 +95,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testViewAllAssignmentsByCourseCodeManyAssignmentsDifferentCourseCodes() {
+    public void testViewAllAssignmentsByCourseCodeManyAssignmentsDifferentCourseCodes() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06", 2);
         testStudentOrganizer.addAssignment(a1);
         Assignment a2 = new Assignment("a2", "  cpsc 121"," 10-14 ",4);
@@ -119,7 +123,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testViewIncompleteAssignmentsByCourseCodeOneAssignment() {
+    public void testViewIncompleteAssignmentsByCourseCodeOneAssignment() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06", 2);
         testStudentOrganizer.addAssignment(a1);
         Assignment a2 = new Assignment(" Lab 5 ", " Cpsc 210 ", " 10-20 ", 2);
@@ -133,7 +137,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testViewIncompleteAssignmentsByCourseCodeManyAssignmentsSameCourseCode() {
+    public void testViewIncompleteAssignmentsByCourseCodeManyAssignmentsSameCourseCode() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06", 2);
         testStudentOrganizer.addAssignment(a1);
         Assignment a2 = new Assignment(" Lab 5 ", " Cpsc 210 ", " 10-20 ", 2);
@@ -150,7 +154,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testViewIncompleteAssignmentsByCourseCodeManyAssignmentsDifferentCourseCode() {
+    public void testViewIncompleteAssignmentsByCourseCodeManyAssignmentsDifferentCourseCode() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06", 2);
         testStudentOrganizer.addAssignment(a1);
         Assignment a2 = new Assignment("a2", "  cpsc 121"," 10-14 ",4);
@@ -179,7 +183,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testViewIncompleteAssignmentsByDueDateOneAssignment() {
+    public void testViewIncompleteAssignmentsByDueDateOneAssignment() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06", 2);
         testStudentOrganizer.addAssignment(a1);
         Assignment a2 = new Assignment(" Lab 5 ", " Cpsc 210 ", " 10-20 ", 2);
@@ -193,7 +197,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testViewIncompleteAssignmentsByDueDateManyAssignments() {
+    public void testViewIncompleteAssignmentsByDueDateManyAssignments() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         Assignment a0 = new Assignment("hypothetical", "cpsc 210","12-04",5);
         testStudentOrganizer.addAssignment(a0);
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06", 2);
@@ -222,7 +226,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testViewIncompleteAssignmentsByEstimatedHoursOneAssignment() {
+    public void testViewIncompleteAssignmentsByEstimatedHoursOneAssignment() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         Assignment a0 = new Assignment("hypothetical", "cpsc 210","12-04",5);
         testStudentOrganizer.addAssignment(a0);
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06", 2);
@@ -236,7 +240,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testViewIncompleteAssignmentsByEstimatedHoursManyAssignments() {
+    public void testViewIncompleteAssignmentsByEstimatedHoursManyAssignments() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06", 2);
         testStudentOrganizer.addAssignment(a1);
         Assignment a2 = new Assignment("a2", "  cpsc 121"," 10-14",4);
@@ -265,7 +269,7 @@ class StudentOrganizerTest {
     }
 
     @Test
-    public void testSize() {
+    public void testSize() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         assertEquals(0,testStudentOrganizer.size());
 
         Assignment a1 = new Assignment(" Lab 4 ", " Cpsc 210 ", "10-06", 2);

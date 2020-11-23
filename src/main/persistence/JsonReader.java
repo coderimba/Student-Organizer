@@ -2,6 +2,10 @@ package persistence;
 
 import model.Assignment;
 import model.StudentOrganizer;
+import model.exceptions.CourseCodeException;
+import model.exceptions.DueDateException;
+import model.exceptions.EstimatedHoursException;
+import model.exceptions.NameException;
 import org.json.*;
 
 import java.io.IOException;
@@ -22,7 +26,8 @@ public class JsonReader { // based on code written in JsonSerializationDemo's pe
 
     // EFFECTS: reads student organizer from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public StudentOrganizer read() throws IOException {
+    public StudentOrganizer read()
+            throws IOException, NameException, CourseCodeException, DueDateException, EstimatedHoursException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseStudentOrganizer(jsonObject);
@@ -40,7 +45,8 @@ public class JsonReader { // based on code written in JsonSerializationDemo's pe
     }
 
     // EFFECTS: parses student organizer from JSON object and returns it
-    private StudentOrganizer parseStudentOrganizer(JSONObject jsonObject) {
+    private StudentOrganizer parseStudentOrganizer(JSONObject jsonObject)
+            throws NameException, CourseCodeException, DueDateException, EstimatedHoursException {
         StudentOrganizer studentOrganizer = new StudentOrganizer();
         addAssignments(studentOrganizer, jsonObject);
         return studentOrganizer;
@@ -48,7 +54,8 @@ public class JsonReader { // based on code written in JsonSerializationDemo's pe
 
     // MODIFIES: studentOrganizer
     // EFFECTS: parses assignments from JSON object and adds them to studentOrganizer
-    private void addAssignments(StudentOrganizer studentOrganizer, JSONObject jsonObject) {
+    private void addAssignments(StudentOrganizer studentOrganizer, JSONObject jsonObject)
+            throws NameException, CourseCodeException, DueDateException, EstimatedHoursException {
         JSONArray jsonArray = jsonObject.getJSONArray("assignments");
         for (Object json: jsonArray) {
             JSONObject nextAssignment = (JSONObject) json;
@@ -58,7 +65,8 @@ public class JsonReader { // based on code written in JsonSerializationDemo's pe
 
     // MODIFIES: studentOrganizer
     // EFFECTS: parses assignment from JSON object and adds it to studentOrganizer
-    private void addAssignment(StudentOrganizer studentOrganizer, JSONObject jsonObject) {
+    private void addAssignment(StudentOrganizer studentOrganizer, JSONObject jsonObject)
+            throws NameException, CourseCodeException, DueDateException, EstimatedHoursException {
         String name = jsonObject.getString("name");
         String courseCode = jsonObject.getString("courseCode");
         String dueDate = jsonObject.getString("dueDate");

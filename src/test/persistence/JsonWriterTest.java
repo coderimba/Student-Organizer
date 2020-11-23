@@ -2,6 +2,10 @@ package persistence;
 
 import model.Assignment;
 import model.StudentOrganizer;
+import model.exceptions.CourseCodeException;
+import model.exceptions.DueDateException;
+import model.exceptions.EstimatedHoursException;
+import model.exceptions.NameException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -25,7 +29,7 @@ class JsonWriterTest extends JsonTest { // based on code written in JsonSerializ
     }
 
     @Test
-    public void testWriterEmptyStudentOrganizer() {
+    public void testWriterEmptyStudentOrganizer() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         try {
             StudentOrganizer studentOrganizer = new StudentOrganizer();
             JsonWriter writer = new JsonWriter("./data/testWriterEmptyStudentOrganizer.json");
@@ -42,7 +46,7 @@ class JsonWriterTest extends JsonTest { // based on code written in JsonSerializ
     }
 
     @Test
-    public void testWriterGeneralStudentOrganizer() {
+    public void testWriterGeneralStudentOrganizer() throws CourseCodeException, EstimatedHoursException, DueDateException, NameException {
         try {
             StudentOrganizer studentOrganizer = new StudentOrganizer();
             studentOrganizer.addAssignment(new Assignment("P2", "CPSC 210", "10-30", 12));

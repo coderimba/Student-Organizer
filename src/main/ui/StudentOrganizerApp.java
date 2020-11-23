@@ -2,6 +2,7 @@ package ui;
 
 import model.Assignment;
 import model.StudentOrganizer;
+import model.exceptions.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -119,9 +120,23 @@ public class StudentOrganizerApp {
         System.out.print("Enter the due date of the assignment in the format mm-dd (e.g. 09-08 for September 8): ");
         dueDate = input.nextLine();
         System.out.print("Enter the estimated number of hours needed to complete assignment (e.g. 0.5 for 30 min): ");
-        estimatedHours = Double.parseDouble(input.nextLine());
+        try {
+            estimatedHours = Double.parseDouble(input.nextLine());
+        } catch (NumberFormatException e) {
+            estimatedHours = 0;
+        }
 
-        myStudentOrganizer.addAssignment(new Assignment(name, courseCode, dueDate, estimatedHours));
+        try {
+            myStudentOrganizer.addAssignment(new Assignment(name, courseCode, dueDate, estimatedHours));
+        } catch (NameException e) {
+            System.out.println("Invalid name. Couldn't add assignment.");
+        } catch (CourseCodeException e) {
+            System.out.println("Invalid course code. Couldn't add assignment.");
+        } catch (DueDateException e) {
+            System.out.println("Invalid due date. Couldn't add assignment.");
+        } catch (EstimatedHoursException e) {
+            System.out.println("Invalid estimated number of hours. Couldn't add assignment.");
+        }
     }
 
     // REQUIRES: the StudentOrganizer contains an assignment with both the same name and courseCode as the user's inputs
@@ -238,6 +253,14 @@ public class StudentOrganizerApp {
             System.out.printf("Loaded Student Organizer from %s\n", JSON_STORE);
         } catch (IOException e) {
             System.out.printf("Unable to read from file: %s\n", JSON_STORE);
+        } catch (NameException e) {
+            System.out.println("Invalid assignment in file; NameException thrown");
+        } catch (CourseCodeException e) {
+            System.out.println("Invalid assignment in file; CourseCodeException thrown");
+        } catch (DueDateException e) {
+            System.out.println("Invalid assignment in file; DueDateException thrown");
+        } catch (EstimatedHoursException e) {
+            System.out.println("Invalid assignment in file; EstimatedHoursException thrown");
         }
     }
 }
