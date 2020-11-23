@@ -30,3 +30,6 @@ Start using *Student Organizer* today and **never miss a deadline again!**
     - setCourseCode(String courseCode)
     - setDueDate(String dueDate)
     - setEstimatedHours(double estimatedHours)
+    
+## Phase 4: Task 3
+- refactor
