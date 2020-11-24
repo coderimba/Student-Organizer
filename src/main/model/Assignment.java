@@ -48,6 +48,7 @@ public class Assignment implements Writable {
         return name;
     }
 
+    // MODIFIES: this
     // EFFECTS: name must contain at least one letter or digit, otherwise NameException is thrown.
     public void setName(String name) throws NameException {
         String trimmedName = name.trim();
@@ -71,6 +72,7 @@ public class Assignment implements Writable {
         return courseCode;
     }
 
+    // MODIFIES: this
     // EFFECTS: courseCode must have a length of 8, following the format of 4 letters, 1 whitespace, and 3 digits,
     // excluding any whitespace before or after the first and last characters, respectively (e.g. " Cpsc 210 " is
     // acceptable), otherwise CourseCodeException is thrown.
@@ -100,6 +102,7 @@ public class Assignment implements Writable {
         return dueDate;
     }
 
+    // MODIFIES: this
     // EFFECTS: dueDate must be in the format mm-dd and has to be valid (e.g. 13-10 or 02-30 are invalid) otherwise
     // DueDateException is thrown (whitespace is allowed before and after the first and last characters of the string).
     public void setDueDate(String dueDate) throws DueDateException {
@@ -134,6 +137,7 @@ public class Assignment implements Writable {
         return estimatedHours;
     }
 
+    // MODIFIES: this
     // EFFECTS: estimatedHours must be greater than zero, otherwise EstimatedHoursException is thrown
     public void setEstimatedHours(double estimatedHours) throws EstimatedHoursException {
         if (estimatedHours <= 0) {

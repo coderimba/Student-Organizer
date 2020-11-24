@@ -36,4 +36,4 @@ Refactoring I would do to improve my design:
 - From StudentOrganizerPanel, extract the loadData and saveData fields and the createMenuBar() and actionPerformed(ActionEvent e) methods into a new class "StudentOrganizerMenu", which will be in the ui package
 - StudentOrganizerMenu will implement ActionListener (StudentOrganizerPanel will no longer implement ActionListener)
 - There will be a bi-directional association between StudentOrganizerPanel and StudentOrganizerMenu, with a multiplicity of 1 on both ends
-- The bi-directional association will allow assignments to be loaded to and saved from the StudentOrganizerPanel when the respective menu items are triggered
+- The bi-directional association will allow assignments to be loaded to and saved from the StudentOrganizerPanel when the respective menu items in StudentOrganizerMenu are triggered
