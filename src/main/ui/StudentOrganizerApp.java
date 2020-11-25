@@ -113,6 +113,7 @@ public class StudentOrganizerApp {
     // MODIFIES: this
     // EFFECTS: prompts user to add an assignment to the StudentOrganizer
     private void addMyAssignment() {
+        // https://stackoverflow.com/questions/16040601/why-is-nextline-returning-an-empty-string/16040699#16040699
         String dueDate;
         double estimatedHours;
 
@@ -122,6 +123,8 @@ public class StudentOrganizerApp {
         System.out.print("Enter the estimated number of hours needed to complete assignment (e.g. 0.5 for 30 min): ");
         try {
             estimatedHours = Double.parseDouble(input.nextLine());
+            // credit to Bernhard Barker for the idea to parse Scanner's nextLine() method as a double as seen in the
+            // Stack Overflow link at the top of this addMyAssignment() method
         } catch (NumberFormatException e) {
             estimatedHours = 0;
         }
